@@ -20,12 +20,15 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 @Entity
 @Table(name="users")	
@@ -34,20 +37,32 @@ public class User {
 	@Uuidv7
 	@Column(name="user_id", columnDefinition = "BINARY(16)")
 	private UUID id;
-	@Column(name="user_email", unique = true, length=100)
+	@Column(name="user_email", unique = true, nullable = false,length=100)
 	private String email;
 	@Column(name="user_name", length = 55)
 	private String name;
 	
+	@Setter
+	@Column(nullable = false)
 	private String password;
+	@Setter
 	private String image;
-	private boolean enabled;
+	
+	@Setter
+	private boolean enabled = false;
+	
+	@Builder.Default
 	private Instant createdAt = Instant.now();
+	@Builder.Default
 	private Instant updatedAt = Instant.now();
 	
 	@Enumerated(EnumType.STRING)
+	@Builder.Default
+	@Setter
 	private Provider provider = Provider.LOCAL;
 	
+	@Builder.Default
+	@Setter
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles",
 			 joinColumns = @JoinColumn(name="user_id"),
