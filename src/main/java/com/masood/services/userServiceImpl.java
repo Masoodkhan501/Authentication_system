@@ -66,7 +66,7 @@ public class userServiceImpl implements userService {
 	@Override
 	public Iterable<userDTO> getAllUsers() {
 		// TODO Auto-generated method stub
-		return null;
+		return u_repo.findAll().stream().map(u -> modelMapper.map(u, userDTO.class)).toList();
 	}
 
 }
