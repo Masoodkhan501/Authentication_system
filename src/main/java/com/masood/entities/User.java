@@ -19,6 +19,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -37,18 +39,17 @@ public class User {
 	@Uuidv7
 	@Column(name="user_id", columnDefinition = "BINARY(16)")
 	private UUID id;
+
+	@NotBlank 
 	@Column(name="user_email", unique = true, nullable = false,length=100)
 	private String email;
 	@Column(name="user_name", length = 55)
 	private String name;
 	
-	@Setter
 	@Column(nullable = false)
 	private String password;
-	@Setter
 	private String image;
 	
-	@Setter
 	private boolean enabled = false;
 	
 	@Builder.Default
@@ -58,11 +59,9 @@ public class User {
 	
 	@Enumerated(EnumType.STRING)
 	@Builder.Default
-	@Setter
 	private Provider provider = Provider.LOCAL;
 	
 	@Builder.Default
-	@Setter
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles",
 			 joinColumns = @JoinColumn(name="user_id"),
