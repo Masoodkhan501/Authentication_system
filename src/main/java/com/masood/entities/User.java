@@ -40,7 +40,6 @@ public class User {
 	@Column(name="user_id", columnDefinition = "BINARY(16)")
 	private UUID id;
 
-	@NotBlank 
 	@Column(name="user_email", unique = true, nullable = false,length=100)
 	private String email;
 	@Column(name="user_name", length = 55)
