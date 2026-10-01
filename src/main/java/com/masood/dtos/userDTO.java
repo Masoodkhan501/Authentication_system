@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class userDTO {
+	private UUID id;
 	private String email;
 	private String name;
 
