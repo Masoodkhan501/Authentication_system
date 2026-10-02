@@ -1,16 +1,14 @@
 package com.masood.dtos;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-import org.springframework.http.HttpStatus;
-
-public class ExceptionDTO {
-    private LocalDateTime timestamp;
-    private HttpStatus statusCode;
+public class ExceptionResDTO {
+    private Instant timestamp;
+    private int statusCode;
     private String error;
     private String message;
 
-    public ExceptionDTO(LocalDateTime timestamp, HttpStatus statusCode, String error, String message, String path) {
+    public ExceptionResDTO(Instant timestamp, int statusCode, String error, String message, String path) {
         this.timestamp = timestamp;
         this.statusCode = statusCode;
         this.error = error;
@@ -20,19 +18,19 @@ public class ExceptionDTO {
 
     private String path;
 
-    public LocalDateTime getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
     }
 
-    public HttpStatus getStatusCode() {
+    public int getStatusCode() {
         return statusCode;
     }
 
-    public void setStatusCode(HttpStatus statusCode) {
+    public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
 
