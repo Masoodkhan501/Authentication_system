@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import com.masood.dtos.userDTO;
 import com.masood.entities.Provider;
 import com.masood.entities.User;
+import com.masood.exceptions.ResourceNotFound;
 import com.masood.respositories.userRepo;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -18,6 +20,7 @@ public class userServiceImpl implements userService {
 	private final ModelMapper modelMapper;
 
 	@Override
+	@Transactional
 	public userDTO createUser(userDTO userDto) {
 		// Manditory Field checks
 		if (userDto.getEmail().isBlank() || userDto.getEmail() == null) {
@@ -40,9 +43,11 @@ public class userServiceImpl implements userService {
 	}
 
 	@Override
+	@Transactional
 	public userDTO getUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = u_repo.findByEmail(email)
+				.orElseThrow(() ->new ResourceNotFound("User with this email not found"));
+		return modelMapper.map(user,userDTO.class);
 	}
 
 	@Override
@@ -64,6 +69,7 @@ public class userServiceImpl implements userService {
 	}
 
 	@Override
+	@Transactional
 	public Iterable<userDTO> getAllUsers() {
 		// TODO Auto-generated method stub
 		return u_repo.findAll().stream().map(u -> modelMapper.map(u, userDTO.class)).toList();

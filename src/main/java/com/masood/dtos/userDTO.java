@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import com.masood.entities.Provider;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,9 +22,12 @@ import lombok.Setter;
 @Builder
 public class userDTO {
 	private UUID id;
+	@Email(message = "Email should be in valid pattern")
+	@NotBlank(message="Email cannot be empty, null or blank")
 	private String email;
+	@NotBlank(message = "Name cannot be empty, null or blank")
 	private String name;
-
+	@NotBlank(message="password can't be empty, null or blank")
 	private String password;
 	private String image;
 	private Instant createdAt = Instant.now();

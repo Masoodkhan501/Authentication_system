@@ -3,6 +3,7 @@ package com.masood.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,11 @@ public class userController {
 	@GetMapping
 	public ResponseEntity<Iterable<userDTO>> getAllUsers(){
 		return ResponseEntity.ok(user_service.getAllUsers());
+	}
+	
+	@GetMapping("/email/{email}")
+	public ResponseEntity<userDTO> getByEmail(@PathVariable String email){
+		return ResponseEntity.ok(user_service.getUserByEmail(email));
 	}
 
 }
