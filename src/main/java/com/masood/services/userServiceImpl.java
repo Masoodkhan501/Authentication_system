@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.masood.dtos.userDTO;
 import com.masood.entities.Provider;
 import com.masood.entities.User;
+import com.masood.exceptions.DuplicateRecordException;
 import com.masood.exceptions.ResourceNotFound;
 import com.masood.respositories.userRepo;
 
@@ -22,14 +23,10 @@ public class userServiceImpl implements userService {
 	@Override
 	@Transactional
 	public userDTO createUser(userDTO userDto) {
-		// Manditory Field checks
-		if (userDto.getEmail().isBlank() || userDto.getEmail() == null) {
-			throw new IllegalArgumentException("Manditory field Email is missing");
-		}
 
 		// user already present
 		if (u_repo.existsByEmail(userDto.getEmail())) {
-			throw new IllegalArgumentException("User with same email already present");
+			throw new DuplicateRecordException("User with same email already present");
 		}
 
 		User user = modelMapper.map(userDto, User.class);

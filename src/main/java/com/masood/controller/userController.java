@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.masood.dtos.userDTO;
 import com.masood.services.userService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -22,7 +23,7 @@ public class userController {
 	private final userService user_service;
 	
 	@PostMapping
-	public ResponseEntity<userDTO> createUser(@RequestBody userDTO userDto){
+	public ResponseEntity<userDTO> createUser(@Valid @RequestBody userDTO userDto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(user_service.createUser(userDto));
 		
 	}

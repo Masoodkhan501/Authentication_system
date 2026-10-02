@@ -9,6 +9,7 @@ import com.masood.entities.Provider;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class userDTO {
 	@NotBlank(message="Email cannot be empty, null or blank")
 	private String email;
 	@NotBlank(message = "Name cannot be empty, null or blank")
+	@Size(min = 2, max = 50, message = "Name should be within the defined size that is 2 - 50 charector length")
 	private String name;
 	@NotBlank(message="password can't be empty, null or blank")
 	private String password;
