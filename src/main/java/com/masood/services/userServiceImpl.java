@@ -1,5 +1,7 @@
 package com.masood.services;
 
+import java.util.UUID;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import com.masood.entities.Provider;
 import com.masood.entities.User;
 import com.masood.exceptions.DuplicateRecordException;
 import com.masood.exceptions.ResourceNotFound;
+import com.masood.helper.userHelper;
 import com.masood.respositories.userRepo;
 
 import jakarta.transaction.Transactional;
@@ -43,7 +46,7 @@ public class userServiceImpl implements userService {
 	@Transactional
 	public userDTO getUserByEmail(String email) {
 		User user = u_repo.findByEmail(email)
-				.orElseThrow(() ->new ResourceNotFound("User with this email not found"));
+				.orElseThrow(() ->new ResourceNotFound("User with "+ email +" not found"));
 		return modelMapper.map(user,userDTO.class);
 	}
 
@@ -54,8 +57,15 @@ public class userServiceImpl implements userService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteUser(String userId) {
 		// TODO Auto-generated method stub
+		
+		UUID id = userHelper.parseUUID(userId);
+		
+		User user = u_repo.findById(id).orElseThrow(() -> new ResourceNotFound("User with id : "+userId+" not found"));
+		
+		u_repo.delete(user);
 
 	}
 
