@@ -71,8 +71,11 @@ public class userServiceImpl implements userService {
 
 	@Override
 	public userDTO getUserByID(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		User user = u_repo.findById(userHelper.parseUUID(userId))
+				.orElseThrow(() -> 
+				new ResourceNotFound("User with id : "+userId+" not found"));
+		return modelMapper.map(user, userDTO.class);
 	}
 
 	@Override
