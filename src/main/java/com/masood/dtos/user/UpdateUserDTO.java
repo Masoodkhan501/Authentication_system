@@ -2,6 +2,8 @@ package com.masood.dtos.user;
 
 import java.util.UUID;
 
+import com.masood.entities.Provider;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +23,11 @@ public class UpdateUserDTO {
     private String name;
     private String email;
     private String image;
+    
+    // This section is handled seprately using another dto.
     private boolean enabled;
+    private Provider provider;
+    
+    // this section too should be handled seprately using another dto
+    private String password;
 }

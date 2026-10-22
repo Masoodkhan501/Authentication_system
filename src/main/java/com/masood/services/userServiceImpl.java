@@ -63,12 +63,41 @@ public class userServiceImpl implements userService {
 				.orElseThrow(() -> 
 				new ResourceNotFound("User with id : "+userId+" not found"));
 		
+		
+		// This whole section needed to be changed after if you want
 		//updating user email address
 		if(userDto.getEmail() != null) {
-			u_repo.
+			//need to perform some sort of operation in here.
+			user.setEmail(userDto.getEmail());
 		}
 		
-		return null;
+		if(userDto.getName() != null) {
+			user.setName(userDto.getName());
+		}
+		
+		if(userDto.getImage() != null) {
+			user.setImage(userDto.getImage());
+		}
+		
+		if(userDto.getProvider() != null) {
+			user.setProvider(userDto.getProvider());
+		}
+		
+		if(userDto.getPassword() != null) {
+			user.setPassword(userDto.getPassword());
+		}
+		
+		// This need to be changed i mean it should be handled seperately right. using seprate Dto
+		if(userDto.isEnabled() != false) {
+			user.setEnabled(userDto.isEnabled());
+		}
+		
+		// This is the ending of the session we wanted to change it later
+		
+		
+		User updatedUser = u_repo.save(user);
+		
+		return modelMapper.map(updatedUser, ResponseUserDTO.class);
 	}
 
 	@Override
