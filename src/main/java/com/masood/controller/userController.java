@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.masood.dtos.userDTO;
+import com.masood.dtos.user.CreateUserDTO;
+import com.masood.dtos.user.ResponseUserDTO;
 import com.masood.services.userService;
 
 import jakarta.validation.Valid;
@@ -23,18 +24,18 @@ public class userController {
 	private final userService user_service;
 	
 	@PostMapping
-	public ResponseEntity<userDTO> createUser(@Valid @RequestBody userDTO userDto){
+	public ResponseEntity<ResponseUserDTO> createUser(@Valid @RequestBody CreateUserDTO userDto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(user_service.createUser(userDto));
 		
 	}
 	
 	@GetMapping
-	public ResponseEntity<Iterable<userDTO>> getAllUsers(){
+	public ResponseEntity<Iterable<ResponseUserDTO>> getAllUsers(){
 		return ResponseEntity.ok(user_service.getAllUsers());
 	}
 	
 	@GetMapping("/email/{email}")
-	public ResponseEntity<userDTO> getByEmail(@PathVariable String email){
+	public ResponseEntity<ResponseUserDTO> getByEmail(@PathVariable String email){
 		return ResponseEntity.ok(user_service.getUserByEmail(email));
 	}
 

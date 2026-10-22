@@ -1,17 +1,19 @@
 package com.masood.services;
 
-import com.masood.dtos.userDTO;
+import com.masood.dtos.user.CreateUserDTO;
+import com.masood.dtos.user.ResponseUserDTO;
+import com.masood.dtos.user.UpdateUserDTO;
 
 public interface userService {
-	public userDTO createUser(userDTO user);
+	public ResponseUserDTO createUser(CreateUserDTO user);
 	
-	public userDTO getUserByEmail(String email);
+	public ResponseUserDTO getUserByEmail(String email);
 	
-	public userDTO updateUser(userDTO userDto, String userId);
+	public ResponseUserDTO updateUser(UpdateUserDTO userDto, String userId);
 	
 	public void deleteUser(String userId);
 	
-	public userDTO getUserByID(String userId);
+	public CreateUserDTO getUserByID(String userId);
 	
-	Iterable<userDTO> getAllUsers();
+	Iterable<ResponseUserDTO> getAllUsers();
 }

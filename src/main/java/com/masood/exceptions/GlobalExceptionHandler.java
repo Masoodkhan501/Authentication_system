@@ -10,8 +10,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.masood.dtos.ExceptionResDTO;
-import com.masood.dtos.multiFieldValidationExceptionResDTO;
+import com.masood.dtos.exception.ExceptionResDTO;
+import com.masood.dtos.exception.multiFieldValidationExceptionResDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 

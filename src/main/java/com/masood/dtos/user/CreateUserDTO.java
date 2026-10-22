@@ -1,10 +1,11 @@
-package com.masood.dtos;
+package com.masood.dtos.user;
 
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.masood.dtos.RolesDTO;
 import com.masood.entities.Provider;
 
 import jakarta.validation.constraints.Email;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class userDTO {
+public class CreateUserDTO {
 	private UUID id;
 	@Email(message = "Email should be in valid pattern")
 	@NotBlank(message="Email cannot be empty, null or blank")
@@ -36,5 +37,5 @@ public class userDTO {
 	private Instant updatedAt = Instant.now();
 	private boolean enabled = false;
 	private Provider provider = Provider.LOCAL;
-	private Set<RoleDTO> roles = new HashSet<>();
+	private Set<RolesDTO> roles = new HashSet<>();
 }

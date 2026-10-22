@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleDTO {
+public class RolesDTO {
 	private UUID id;// id of the roles
 	private String name;//name of the role eg: admin, guest etc
 }

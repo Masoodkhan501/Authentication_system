@@ -1,4 +1,4 @@
-package com.masood.dtos;
+package com.masood.dtos.exception;
 
 import java.time.Instant;
 
